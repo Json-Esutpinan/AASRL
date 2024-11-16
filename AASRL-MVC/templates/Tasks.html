@@ -3,67 +3,187 @@
 {% block title %} Taks {% endblock %}
 
 {% block body %}
-    <div class="parent">
-        <div class="header">
-                <table class="theader">
+<div class="parent">
+    <div class="header">
+        <table class="theader">
+            <tr>
+                <td>
+                    <h1 class="tittle">Tareas</h1>
+                    <span> Bienvenido</span>
+                </td>
+                <td>
+
+                </td>
+                <td class="profile">
+                    <img src="../static/img/v215_389.png">
+                    <div>
+                        <h2>Jeison Estupiñán</h2>
+                        <span>Administrador</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="sidebar">
+        <table class="tsidebar">
+            <th>
+                <h2>AASRL</h2>
+            </th>
+            <tr>
+                <td class="dashop">
+                    <a href="Dashboard"> <img src="../static/img/v215_343.png"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href='Dashboard'">Dashboard</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dashop">
+                    <a href="Servers"> <img src="../static/img/v215_346.png"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href='Servers'">Servidores</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dashop">
+                    <a href=""> <img src="../static/img/v215_349.png" class="task-icon"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href=''">Tareas</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dashop">
+                    <a href="#"> <img src="../static/img/v215_355.png"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href='#'">C.Sesión</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="dashboard">
+        <h2 class="tittle" style="text-align: center;">
+            Tareas Predeterminadas
+        </h2>
+        <form action="/Tasks/submit" method="POST">
+            <table class="ttasks">
+                <thead>
                     <tr>
-                        <td>
-                            <h1 class="tittle">Tareas</h1>
-                            <span> Bienvenido</span>
-                        </td>
-                        <td>
-                            
-                        </td>
-                        <td class="profile">
-                            <img src="../static/img/v215_389.png">
-                            <div><h2>Jeison Estupiñán</h2>
-                                <span>Administrador</span>
-                            </div>
+                        <th class="tittle">Nombre</th>
+                        <th class="tittle">Descripción</th>
+                        <th class="tittle">Servidor</th>
+                        <th class="tittle">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Apagar Servidor</td>
+                        <td>Apaga completamente el servidor que escoja</td>
+                        <td><select name="server_id" id="server_id">
+                                {% for server in host %}
+                                <option value="{{server.host}}">{{server.host}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><button type="submit">Ejecutar</button>
+                            <input type="hidden" name="command" id="command" value="shutdown now">
                         </td>
                     </tr>
-                </table>
-        </div>
-        <div class="sidebar">
-            <table class="tsidebar">
-                <th>
-                    <h2>AASRL</h2>
-                </th>
-                <tr>
-                    <td class="dashop">
-                        <a href="Dashboard"> <img src="../static/img/v215_343.png"></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href='Dashboard'">Dashboard</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="dashop">
-                        <a href="Servers"> <img src="../static/img/v215_346.png"></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href='Servers'">Servidores</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="dashop">
-                        <a href=""> <img src="../static/img/v215_349.png" class="task-icon"></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href=''">Tareas</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="dashop">
-                        <a href="#"> <img src="../static/img/v215_355.png" ></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href='#'">C.Sesión</button>
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>Reiniciar Servidor</td>
+                        <td>Reinicia el servidor que escoja en 10 Segundos</td>
+                        <td><select name="server_id" id="server_id">
+                                {% for server in host %}
+                                <option value="{{server.host}}">{{server.host}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><button type="submit">Ejecutar</button>
+                            <input type="hidden" name="command" id="command" value="shutdown -r 10">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Actualizar Paquetes</td>
+                        <td>Actualiza todos los paquetes instalados en el servidor</td>
+                        <td><select name="server_id" id="server_id">
+                                {% for server in host %}
+                                <option value="{{server.host}}">{{server.host}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><button type="submit">Ejecutar</button>
+                            <input type="hidden" name="command" id="command" value="sudo apt update && sudo apt upgrade -y">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Reiniciar Servicio Apache</td>
+                        <td>Reinicia el servicio Apache en el servidor seleccionado</td>
+                        <td><select name="server_id" id="server_id">
+                                {% for server in host %}
+                                <option value="{{server.host}}">{{server.host}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><button type="submit">Ejecutar</button>
+                            <input type="hidden" name="command" id="command" value="sudo systemctl restart apache2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ver Espacio en Disco</td>
+                        <td>Muestra el uso del espacio en disco del servidor seleccionado</td>
+                        <td><select name="server_id" id="server_id">
+                                {% for server in host %}
+                                <option value="{{server.host}}">{{server.host}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><button type="submit">Ejecutar</button>
+                            <input type="hidden" name="command" id="command" value="df -h">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ver Procesos Activos</td>
+                        <td>Muestra los procesos activos en el servidor seleccionado</td>
+                        <td><select name="server_id" id="server_id">
+                                {% for server in host %}
+                                <option value="{{server.host}}">{{server.host}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><button type="submit">Ejecutar</button>
+                            <input type="hidden" name="command" id="command" value="ps aux">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Limpiar Caché</td>
+                        <td>Limpia la caché del servidor seleccionado</td>
+                        <td><select name="server_id" id="server_id">
+                                {% for server in host %}
+                                <option value="{{server.host}}">{{server.host}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><button type="submit">Ejecutar</button>
+                            <input type="hidden" name="command" id="command" value="sudo sync; sudo sysctl -w vm.drop_caches=3">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ver Estado del Servicio SSH</td>
+                        <td>Muestra el estado del servicio SSH en el servidor seleccionado</td>
+                        <td><select name="server_id" id="server_id">
+                                {% for server in host %}
+                                <option value="{{server.host}}">{{server.host}}</option>
+                                {% endfor %}
+                            </select></td>
+                        <td><button type="submit">Ejecutar</button>
+                            <input type="hidden" name="command" id="command" value="sudo systemctl status ssh">
+                        </td>
+                    </tr>
+                    
+                </tbody>
             </table>
-        </div>
-        <div class="dashboard">Gráficas de Monitoreo</div>
-        <div class="alerts">Alertas</div>
+        </form>
     </div>
-        
+    <div class="alerts">
+        <h3 class="tittle">
+            Agregar Tareas
+        </h3>
+    </div>
+</div>
+
 {% endblock %}

@@ -20,7 +20,6 @@ class Database:
         try:
             self.conn = mysql.connector.connect(**self.config)
             self.cursor = self.conn.cursor(dictionary=True)
-            print("Conexión exitosa a la base de datos.")
         except mysql.connector.Error as err:
             print(f"Error al conectar a la base de datos: {err}")
 
@@ -29,7 +28,6 @@ class Database:
             self.cursor.close()
         if self.conn:
             self.conn.close()
-            print("Conexión cerrada.")
 
     def execute_query(self, query, params=None):
         try:

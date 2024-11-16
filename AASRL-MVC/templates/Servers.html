@@ -3,73 +3,82 @@
 {% block title %} Servers {% endblock %}
 
 {% block body %}
-    <div class="parent">
-        <div class="header">
-            <table class="theader">
-                <tr>
-                    <td>
-                        <h1 class="tittle">Servidores</h1>
-                        <span> Bienvenido</span>
-                    </td>
-                    <td>
+<div class="parent">
+    <div class="header">
+        <table class="theader">
+            <tr>
+                <td>
+                    <h1 class="tittle">Servidores</h1>
+                    <span> Bienvenido</span>
+                </td>
+                <td>
 
-                    </td>
-                    <td class="profile">
-                        <img src="../static/img/v215_389.png">
-                        <div>
-                            <h2>Jeison Estupiñán</h2>
-                            <span>Administrador</span>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="sidebar">
-            <table class="tsidebar">
-                <th>
-                    <h2>AASRL</h2>
-                </th>
-                <tr>
-                    <td class="dashop">
-                        <a href="Dashboard"> <img src="../static/img/v215_343.png"></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href='Dashboard'">Dashboard</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="dashop">
-                        <a href=""><img src="../static/img/v215_346.png"></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href=''">Servidores</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="dashop">
-                        <a href="Tasks"> <img src="../static/img/v215_349.png" class="task-icon"></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href='Tasks'">Tareas</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="dashop">
-                        <a href="#"> <img src="../static/img/v215_355.png" ></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href='#'">C.Sesión</button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="dashboard">
-            <h2 class="tittle">Ubuntu WSL</h2>
-            <div class="iframe-graphs">
-
-            </div>
-        </div>
-        <div class="alerts">Agregar Servidores</div>
+                </td>
+                <td class="profile">
+                    <img src="../static/img/v215_389.png">
+                    <div>
+                        <h2>Jeison Estupiñán</h2>
+                        <span>Administrador</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
+    <div class="sidebar">
+        <table class="tsidebar">
+            <th>
+                <h2>AASRL</h2>
+            </th>
+            <tr>
+                <td class="dashop">
+                    <a href="Dashboard"> <img src="../static/img/v215_343.png"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href='Dashboard'">Dashboard</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dashop">
+                    <a href=""><img src="../static/img/v215_346.png"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href=''">Servidores</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dashop">
+                    <a href="Tasks"> <img src="../static/img/v215_349.png" class="task-icon"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href='Tasks'">Tareas</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dashop">
+                    <a href="#"> <img src="../static/img/v215_355.png"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href='#'">C.Sesión</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="dashboard">
+        <div class="grid-container">
+            {% for i in range (servers_count) %}
+            <div class="grid-item">
+                <h2 class="tittle">Servidor {{ i +1 }}</h2> 
+                <span class="ico-server"><img src="../static/img/v221_815.png">{{ servers_info[i].cpu }}<br></span>
+                <span class="ico-server"><img src="../static/img/v221_807.png">{{ servers_info[i].memory }}<br> </span>
+                <span class="ico-server"><img src="../static/img/v221_811.png">{{ servers_info[i].disk }}<br> </span>
+                <span class="ico-server"><img src="../static/img/v221_821.png">{{ servers_info[i].so_desc }}<br></span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="alerts">
+        <h3 class="tittle">Agregar Servidores</h3>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,4 +1,4 @@
-from models.db_connection import Database
+from .db_connection import Database
 
 class CrudModel:
     def __init__(self):

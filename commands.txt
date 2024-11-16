@@ -1,0 +1,4 @@
+lshw -short -class cpu
+lshw -short -class memory
+df -h /
+lsb_release -a

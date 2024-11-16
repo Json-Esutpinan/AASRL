@@ -75,33 +75,20 @@ body {
   grid-row-start: 1;
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
+  overflow: hidden;
 }
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    top: 0;
-  }
-
-  .sidebar.active {
-    transform: translateX(0);
-  }
-}
-
-
 
 .tsidebar {
   width: 100%;
   height: 60%;
+  overflow-y: auto;
 }
 
 .tsidebar th {
   width: 100%;
   text-align: center;
   color: #E8E8E8;
-  font-size: 24;
+  font-size: 24px;
 }
 
 .tframe {
@@ -109,6 +96,12 @@ body {
   height: 100%;
 }
 
+.tsidebar tr {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .dashop {
   width: 100%;
@@ -122,6 +115,7 @@ body {
   width: 20px;
   margin-right: 10px;
 }
+
 
 .dashboard {
   width: 100%;
@@ -152,4 +146,40 @@ body {
   grid-column: span 4 / span 4;
   grid-column-start: 2;
   grid-row-start: 5;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.grid-item {
+  align-items: center;
+  border-radius: 2cap;
+  border: 1px solid #E8E8E8;
+  background-color: #E8E8E8;
+}
+
+.ico-server{
+  text-align: center;
+  vertical-align: middle;
+  display:flex;
+  width: 100%;
+}
+
+.ico-server img{
+  
+  width: 40px;
+}
+
+.ttasks {
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.ttasks td{
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
