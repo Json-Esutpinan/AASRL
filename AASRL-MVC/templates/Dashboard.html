@@ -1,87 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
-    <link href="../static/main.css" rel="stylesheet" />
-    <title>Document</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <div class="parent">
-        <div class="header">
-            <table class="theader">
-                <tr>
-                    <td>
-                        <h1 class="tittle">Dashboard</h1>
-                        <span> Bienvenido</span>
-                    </td>
-                    <td>
+{% block title %} Dashboard {% endblock %}
 
-                    </td>
-                    <td class="profile">
-                        <img src="../static/img/v215_389.png">
-                        <div>
-                            <h2>Jeison Estupiñán</h2>
-                            <span>Administrador</span>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="sidebar">
-            <table class="tsidebar">
-                <th>
-                    <h2>AASRL</h2>
-                </th>
+{% block body %}
+<div class="parent">
+    <div class="header">
+        <table class="theader">
+            <tr>
+                <td>
+                    <h1 class="tittle">Dashboard</h1>
+                    <span> Bienvenido</span>
+                </td>
+                <td>
+
+                </td>
+                <td class="profile">
+                    <img src="../static/img/v215_389.png">
+                    <div>
+                        <h2>Jeison Estupiñán</h2>
+                        <span>Administrador</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="sidebar">
+        <table class="tsidebar">
+            <th>
+                <h2>AASRL</h2>
+            </th>
+            <tr>
+                <td class="dashop">
+                    <a href=""> <img src="../static/img/v215_343.png"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href=''">Dashboard</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dashop">
+                    <a href="Servers"> <img src="../static/img/v215_346.png"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href='Servers'">Servidores</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dashop">
+                    <a href="Tasks"> <img src="../static/img/v215_349.png" class="task-icon"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href='Tasks'">Tareas</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="dashop">
+                    <a href="#"> <img src="../static/img/v215_355.png"></a>
+                    <div>
+                        <button class="button-menu" onclick="window.location.href='#'">C.Sesión</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="dashboard">
+        <div class="iframe-graphs">
+            <table class="tframe">{% for i in range(host) %}
                 <tr>
-                    <td class="dashop">
-                        <a href=""> <img src="../static/img/v215_343.png"></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href=''">Dashboard</button>
-                        </div>
-                    </td>
+                    <td colspan="2"><h3 class="tittle">Servidor #{{ i + 1 }}</h3></td>
                 </tr>
                 <tr>
-                    <td class="dashop">
-                        <a href="Servers"> <img src="../static/img/v215_346.png"></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href='Servers'">Servidores</button>
-                        </div>
-                    </td>
+                    <td><iframe src="/graphs/cpu{{ i + 1 }}"></iframe></td>
+                    <td><iframe src="/graphs/memory{{ i + 1 }}"></iframe></td>
                 </tr>
                 <tr>
-                    <td class="dashop">
-                        <a href="Tasks"> <img src="../static/img/v215_349.png" class ="task-icon"></a>
-                        <div>
-                            <button class="button-menu" onclick="window.location.href='Tasks'">Tareas</button>
-                        </div>
-                    </td>
+                    <td><iframe src="/graphs/disk{{ i + 1 }}"></iframe></td>
+                    <td><iframe src="/graphs/net{{ i + 1 }}"></iframe></td>
                 </tr>
-            </table>
-        </div>
-        <div class="dashboard">
-            <div class="iframe-graphs">
-                <table class="tframe">
-                    <tr>
-                        <td><iframe src="http://localhost:8050/cpu"></iframe></td>
-                        <td><iframe src="http://localhost:8050/memory"></iframe></td>
-                    </tr>
-                    <tr>
-                        <td><iframe src="http://localhost:8050/disk"></iframe></td>
-                        <td><iframe src="http://localhost:8050/net"></iframe></td>
-                    </tr>
-                </table>            
-            </div>
-        </div>
-        <div class="alerts">
-            <h2 class="tittle">Alertas</h2><br>
-            <div class="iframe-graphs">
-            </div>
+                {% endfor %}</table>
+        </div> 
+    </div>
+    <div class="alerts">
+        <h2 class="tittle">Alertas</h2><br>
+        <div class="iframe-graphs">
         </div>
     </div>
 
-</body>
+    {% endblock %}
 
-</html>
+    </html>
